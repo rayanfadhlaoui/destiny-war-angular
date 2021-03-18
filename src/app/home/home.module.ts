@@ -1,7 +1,5 @@
-import { HomeRoutingModule } from './home-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule} from '@angular/http';
 import { HomeComponent } from './home.component';
 
 @NgModule({
@@ -9,7 +7,7 @@ import { HomeComponent } from './home.component';
     HomeComponent
   ],
   imports: [
-    BrowserModule, HttpModule, HomeRoutingModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [HomeComponent]
