@@ -5,19 +5,22 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 import { User } from '@app/_models';
 
-const users: User[] = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+const users: User[] = [{ id: 1, name: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = request;
 
+        return next.handle(request);
+        //return this.http.post('http://localhost:8080/sessions/create', user)
+        
         // wrap in delayed observable to simulate server api call
-        return of(null)
+       /* return of(null)
             .pipe(mergeMap(handleRoute))
             .pipe(materialize()) // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
             .pipe(delay(500))
-            .pipe(dematerialize());
+            .pipe(dematerialize());*/
 
         function handleRoute() {
             switch (true) {
@@ -34,12 +37,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // route functions
 
         function authenticate() {
-            const { username, password } = body;
-            const user = users.find(x => x.username === username && x.password === password);
+            const { name, password } = body;
+            const user = users.find(x => x.name === name && x.password === password);
             if (!user) return error('Username or password is incorrect');
             return ok({
                 id: user.id,
-                username: user.username,
+                name: user.name,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 token: 'fake-jwt-token'
