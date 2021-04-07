@@ -24,12 +24,13 @@ export class AuthenticationService {
     login(name: string, password: string) {
         const httpOptions = {
             headers: new HttpHeaders({
-              'Content-Type':  'application/json',
-              'Access-Control-Allow-Origin': '*'
-            })};
-        return this.http.post<User>(`${environment.userUrl}/users`, { name, password }, httpOptions)
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            })
+        };
+        return this.http.post<User>(`${environment.baseUrl}/users`, { name, password }, httpOptions)
             .pipe(map(user => {
-                if(user.name != null) {
+                if (user.name != null) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
@@ -41,6 +42,9 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('mainCharacter');
+        localStorage.removeItem("gameInformation")
+        localStorage.removeItem("currentTournaments")
         this.currentUserSubject.next(null);
     }
 }

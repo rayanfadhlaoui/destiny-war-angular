@@ -11,7 +11,6 @@ const users: User[] = [{ id: 1, name: 'test', password: 'test', firstName: 'Test
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = request;
-
         return next.handle(request);
         //return this.http.post('http://localhost:8080/sessions/create', user)
         

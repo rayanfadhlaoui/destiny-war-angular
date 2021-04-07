@@ -1,0 +1,68 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Create character</h4>
+        <div class="card-body">
+            <form [formGroup]="fighterForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>First name</label>
+                        <input  formControlName="firstName"
+                                [ngClass]="{ 'is-invalid': submitted && fighterForm.controls.firstName.errors}"
+                                type="text" 
+                                class="form-control">
+                        <div *ngIf="submitted && fighterForm.controls.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="fighterForm.controls.firstName.errors.required">First name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Last name</label>
+                        <input  formControlName="lastName"
+                                [ngClass]="{'is-invalid': submitted && fighterForm.controls.lastName.errors}"
+                                type="text" 
+                                class="form-control">
+                        <div *ngIf="submitted && fighterForm.controls.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="fighterForm.controls.lastName.errors.required">Last name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Class</label>
+                        <select formControlName="class" class="form-control" >
+                            <option selected>No class</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Race</label>
+                        <select formControlName="race" class="form-control">
+                            <option selected>Human</option>
+                            <option>Orc</option>
+                            <option>Elf</option>
+                            <option>Dwarf</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Gender</label>
+                        <select formControlName="gender" class="form-control">
+                            <option selected>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Age</label>
+                        <input  formControlName="age" 
+                                [ngClass]="{'is-invalid': submitted && fighterForm.controls.age.errors}"
+                                type="number" 
+                                class="form-control">
+                        <div *ngIf="submitted && fighterForm.controls.age.errors" class="invalid-feedback">
+                            <div *ngIf="fighterForm.controls.age.errors.required">Age is required</div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@ import { appRoutingModule } from './app.routing';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { LoginComponent } from './login';
 import { HomeModule } from './home/home.module';
+import { TournamentModule } from './tournament/tournament.module';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { HomeModule } from './home/home.module';
         ReactiveFormsModule,
         HomeModule,
         HttpClientModule,
+        TournamentModule,
         appRoutingModule
     ],
     declarations: [
